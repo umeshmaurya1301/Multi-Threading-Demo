@@ -1,6 +1,7 @@
 package com.example.concurrency.controller;
 
 
+import com.example.concurrency.example.MonitorLockExample;
 import com.example.concurrency.example.ThreadCreationExample;
 import lombok.AccessLevel;
 import lombok.RequiredArgsConstructor;
@@ -17,9 +18,15 @@ import org.springframework.web.bind.annotation.RestController;
 public class ThreadController {
 
     ThreadCreationExample threadCreationExample;
+    MonitorLockExample monitorlockExample;
 
     @PostMapping("/create")
     public ResponseEntity<String> threadCreation() {
         return threadCreationExample.run();
+    }
+
+    @PostMapping("/monitor-lock")
+    public ResponseEntity<String> monitorLock() {
+        return monitorlockExample.run();
     }
 }
