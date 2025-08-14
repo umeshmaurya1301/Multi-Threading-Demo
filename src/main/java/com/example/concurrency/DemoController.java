@@ -43,6 +43,22 @@ public class DemoController {
 		}
 	}
 
+	@GetMapping("/spurious-wake-up")
+	public ResponseEntity<Map<String, Object>> spuriousWakeUpExample() {
+		try {
+			SpuriousWakeUpExample example = new SpuriousWakeUpExample();
+			Map<String, Object> result = new LinkedHashMap<>();
+			result.put("topic", "spurious-wake-up");
+			result.put("data", example.run());
+			return ResponseEntity.ok(result);
+		} catch (Exception e) {
+			Map<String, Object> error = new LinkedHashMap<>();
+			error.put("topic", "thread-creation");
+			error.put("error", e.getClass().getSimpleName() + ": " + e.getMessage());
+			return new ResponseEntity<>(error, HttpStatus.INTERNAL_SERVER_ERROR);
+		}
+	}
+
 	@GetMapping("/atomic-longadder")
 	public ResponseEntity<Map<String, Object>> atomicLongAdder() {
 		try {
